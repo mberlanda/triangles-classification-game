@@ -1,1 +1,56 @@
-body { font-family: sans-serif; background: #f0f8ff; }
+body {
+    font-family: 'Comic Sans MS', sans-serif;
+    background: #f0f8ff;
+    text-align: center;
+    padding: 2rem;
+    color: #333;
+  }
+  
+  h1 {
+    color: #0077cc;
+  }
+  
+  form {
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    gap: 1rem;
+  }
+
+  form label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  form input, form select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  form button {
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  form button:hover {
+    background-color: #005fa3;
+  }
