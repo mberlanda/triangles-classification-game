@@ -19,7 +19,7 @@ export const TRIANGLE_INPUTS_ERROR = {
  * @property {number} [B] - The optional angle (in degrees) opposite to side `b`.
  * @property {number} [C] - The optional angle (in degrees) opposite to side `c`.
  */
-interface TriangleProps {
+export interface TriangleProps {
     a: number;
     b?: number;
     c?: number;
