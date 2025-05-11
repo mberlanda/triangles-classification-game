@@ -1,7 +1,7 @@
 import * as angleUtils from './angle';
 
 export const TRIANGLE_INPUTS_ERROR = {
-    NEGATIVE_VALUES: 'Sides and angles must be positive numbers.',
+    NON_POSITIVE_VALUES: 'Sides and angles must be positive numbers.',
     INVALID_ANGLE_SUM: 'Invalid angle inputs: sum of angles exceeds 180 degrees',
     INVALID_COMBINATION: 'Invalid combination of properties. Please provide valid sides and/or angles.',
 }
@@ -55,6 +55,25 @@ class Triangle {
         this.B = validatedProps.B!;
         this.C = validatedProps.C!;
     }
+
+    /**
+     * Retrieves the angles of the triangle.
+     * 
+     * @returns {[number, number, number]} An array containing the angles [A, B, C] of the triangle in degrees.
+     */
+    get angles(): [number, number, number] {
+        return [this.A, this.B, this.C];
+    }
+
+    /**
+     * Retrieves the sides of the triangle.
+     * 
+     * @returns {[number, number, number]} An array containing the side lengths [a, b, c] of the triangle.
+     */
+    get sides(): [number, number, number] {
+        return [this.a, this.b, this.c];
+    }
+
     /**
      * Calculates the perimeter of the triangle.
      * 
@@ -84,8 +103,8 @@ class Triangle {
         const { a, b, c, A, B, C } = props;
 
         // Check if at least one side and one angle are negative and throw an error
-        if ((a && a < 0) || (b && b < 0) || (c && c < 0) || (A && A < 0) || (B && B < 0) || (C && C < 0)) {
-            throw new Error(TRIANGLE_INPUTS_ERROR.NEGATIVE_VALUES);
+        if ((a && a <= 0) || (b && b <= 0) || (c && c <= 0) || (A && A <= 0) || (B && B <= 0) || (C && C <= 0)) {
+            throw new Error(TRIANGLE_INPUTS_ERROR.NON_POSITIVE_VALUES);
         }
 
         // Check if the sum of all defined angles is greater than 180 degrees and throw an error
@@ -93,15 +112,29 @@ class Triangle {
             throw new Error(TRIANGLE_INPUTS_ERROR.INVALID_ANGLE_SUM);
         }
 
+        // Handle all valid combinations of sides and angles
+        // Combination 1: All three sides are provided
         if (a != null && b != null && c != null) {
             return this.useLawOfCosines(a, b, c);
-        } else if (a != null && b != null && C != null) {
+        }
+        // Combination 2: Two sides and the included angle are provided (a, b, C)
+        else if (a != null && b != null && C != null) {
             return this.useLawOfCosinesAndSines(a, C, b);
-        } else if (a != null && B != null && C != null) {
+        }
+        // Combination 3: Two sides and the included angle are provided (a, c, B)
+        else if (a != null && c != null && B != null) {
+            return this.useLawOfCosinesAndSines(a, B, c);
+        }
+        // Combination 4: Two angles and the included side are provided (a, B, C)
+        else if (a != null && B != null && C != null) {
             return this.useLawOfSinesASA(a, B, C);
-        } else if (A != null && B != null && a != null) {
+        }
+        // Combination 5: Two angles and a non-included side are provided (A, B, a)
+        else if (A != null && B != null && a != null) {
             return this.useLawOfSinesAAS(A, B, a);
-        } else {
+        }
+        // If none of the valid combinations are provided, throw an error
+        else {
             throw new Error(TRIANGLE_INPUTS_ERROR.INVALID_COMBINATION);
         }
     }

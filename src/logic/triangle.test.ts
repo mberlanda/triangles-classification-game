@@ -70,7 +70,7 @@ describe('Triangle', () => {
         });
 
         it('should throw an error for negative values', () => {
-            expect(() => new Triangle({ a: -3, b: 4, c: 5 })).toThrowError(TRIANGLE_INPUTS_ERROR.NEGATIVE_VALUES);
+            expect(() => new Triangle({ a: -3, b: 4, c: 5 })).toThrowError(TRIANGLE_INPUTS_ERROR.NON_POSITIVE_VALUES);
         });
     });
 });
