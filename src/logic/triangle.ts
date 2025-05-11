@@ -4,6 +4,7 @@ export const TRIANGLE_INPUTS_ERROR = {
     NON_POSITIVE_VALUES: 'Sides and angles must be positive numbers.',
     INVALID_ANGLE_SUM: 'Invalid angle inputs: sum of angles exceeds 180 degrees',
     INVALID_COMBINATION: 'Invalid combination of properties. Please provide valid sides and/or angles.',
+    TRIANGLE_INEQUALITY: 'The sides do not satisfy the triangle inequality.',
 }
 
 /**
@@ -115,6 +116,7 @@ class Triangle {
         // Handle all valid combinations of sides and angles
         // Combination 1: All three sides are provided
         if (a != null && b != null && c != null) {
+            this.validateTriangleInequality(a, b, c);
             return this.useLawOfCosines(a, b, c);
         }
         // Combination 2: Two sides and the included angle are provided (a, b, C)
@@ -170,6 +172,15 @@ class Triangle {
         const b = (a * Math.sin(angleUtils.toRadians(B))) / Math.sin(angleUtils.toRadians(A));
         const c = (a * Math.sin(angleUtils.toRadians(C))) / Math.sin(angleUtils.toRadians(A));
         return { a, b, c, A, B, C };
+    }
+
+    // Validate triangle inequality theorem:
+    // the sum of the lengths of any two sides must be greater than or equal to the
+    // length of the remaining side https://en.wikipedia.org/wiki/Triangle_inequality
+    validateTriangleInequality = (a: number, b: number, c: number): void => {
+        if ((a + b) < c || (a + c) < b || (b + c) < a) {
+            throw new Error(TRIANGLE_INPUTS_ERROR.TRIANGLE_INEQUALITY);
+        }
     }
 }
 export default Triangle;

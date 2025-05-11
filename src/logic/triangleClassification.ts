@@ -27,12 +27,6 @@ export function classifyTriangle(triangle: Triangle): { angle: AngleType; side: 
     let angleType: AngleType;
 
     const angles = triangle.angles;
-
-    // Ensure the sum of the angles is exactly 180 degrees
-    if (angles.reduce((sum, angle) => sum + angle, 0) !== 180) {
-        throw new Error('The sum of the angles must be 180 degrees.');
-    }
-
     if (angles.some(angle => angle > 90)) {
         angleType = 'obtuse';
     } else if (angles.some(angle => angle === 90)) {
@@ -45,12 +39,6 @@ export function classifyTriangle(triangle: Triangle): { angle: AngleType; side: 
     let sideType: SideType;
 
     const sides = triangle.sides;
-
-    // Ensure all sides are positive numbers
-    if (sides.some(side => side <= 0)) {
-        throw new Error('The sides must be positive numbers.');
-    }
-
     // Verify the triangle inequality theorem
     // The sum of the lengths of any two sides must be greater than the length of the third side
     const sortedSides = [...sides].sort((a, b) => a - b);

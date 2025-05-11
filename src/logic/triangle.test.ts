@@ -36,6 +36,14 @@ describe('Triangle', () => {
             expect(triangle.A).toBeCloseTo(36.87, 2);
             expect(triangle.B).toBeCloseTo(53.13, 2);
         });
+        it('should calculate the third side and remaining angles correctly - even if swapping vertex name', () => {
+            const triangle = new Triangle({ a: 3, c: 4, B: 90 });
+            expect(triangle.b).toBeCloseTo(4, 2);
+            expect(triangle.c).toBeCloseTo(5, 2);
+            expect(triangle.A).toBeCloseTo(36.87, 2);
+            expect(triangle.B).toBeCloseTo(53.13, 2);
+            expect(triangle.C).toBeCloseTo(90, 2);
+        });
     });
 
     describe('when two angles and the included side are provided -> useLawOfSinesASA', () => {
@@ -71,6 +79,14 @@ describe('Triangle', () => {
 
         it('should throw an error for negative values', () => {
             expect(() => new Triangle({ a: -3, b: 4, c: 5 })).toThrowError(TRIANGLE_INPUTS_ERROR.NON_POSITIVE_VALUES);
+        });
+
+        it('should throw an error if the sum of angles exceeds 180 degrees', () => {
+            expect(() => new Triangle({ a: 3, b: 4, A: 100, B: 90 })).toThrow('Invalid angle inputs: sum of angles exceeds 180 degrees');
+        });
+    
+        it('should throw an error if sides do not satisfy the triangle inequality', () => {
+            expect(() => new Triangle({ a: 1, b: 2, c: 10 })).toThrow('The sides do not satisfy the triangle inequality.');
         });
     });
 });
