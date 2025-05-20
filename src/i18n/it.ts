@@ -17,5 +17,6 @@ export default {
   next: "Prossimo",
   finish: "Fine",
   score: "Punteggio",
-  total: "Totale"
+  total: "Totale",
+  restart: "Ricomincia"
 };

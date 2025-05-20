@@ -3,7 +3,7 @@ import { useState } from 'preact/hooks';
 import i18n from '../i18n/it';
 
 interface Props {
-  onStart: (name: string, quizCount: number, timeout: number) => void;
+  onStart: (gameState: GameState) => void;
 }
 
 const SetupScreen: FunctionalComponent<Props> = ({ onStart }) => {
@@ -14,7 +14,7 @@ const SetupScreen: FunctionalComponent<Props> = ({ onStart }) => {
   const handleSubmit = (e: Event) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onStart(name.trim(), quizCount, timeout);
+    onStart({ playerName: name.trim(), quizCount, timeout });
   };
 
   return (
@@ -46,7 +46,7 @@ const SetupScreen: FunctionalComponent<Props> = ({ onStart }) => {
           <span>{timeout} seconds</span>
         </label>
         <br />
-        <button type="submit">{i18n.start}</button>
+        <button class="primary" type="submit">{i18n.start}</button>
       </form>
     </div>
   );

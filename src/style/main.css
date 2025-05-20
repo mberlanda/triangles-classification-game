@@ -40,7 +40,7 @@ body {
     font-size: 1rem;
   }
   
-  form button {
+  button.primary {
     background-color: #0077cc;
     color: #fff;
     border: none;
@@ -51,6 +51,6 @@ body {
     transition: background-color 0.3s;
   }
   
-  form button:hover {
+  button.primary:hover {
     background-color: #005fa3;
   }
