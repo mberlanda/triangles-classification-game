@@ -19,7 +19,6 @@ const SetupScreen: FunctionalComponent<Props> = ({ onStart }) => {
 
   return (
     <div class="setup-screen">
-      <h1>Triangles Game</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Nome:
